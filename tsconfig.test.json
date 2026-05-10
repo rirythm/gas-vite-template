@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@shared/*": ["./src/shared/*"]
+    },
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["build/**/*.test.ts", "build/**/*.ts", "src/**/*.test.ts", "src/shared"]
+}

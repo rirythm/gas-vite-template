@@ -1,0 +1,65 @@
+{
+  "name": "gas-vite-template",
+  "version": "0.1.0",
+  "description": "Google Apps Script template powered by Node.js, pnpm, Vite, Rolldown, and TypeScript.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "rirythm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rirythm/gas-vite-template.git"
+  },
+  "keywords": [
+    "google-apps-script",
+    "gas",
+    "vite",
+    "vite8",
+    "rolldown",
+    "typescript",
+    "clasp",
+    "template"
+  ],
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --config vite.client.config.ts --host 127.0.0.1",
+    "build": "pnpm run clean && pnpm run build:client && pnpm run build:server",
+    "build:client": "vite build --config vite.client.config.ts",
+    "build:manifest": "node scripts/copy-manifest.mjs",
+    "build:server": "vite build --config vite.server.config.ts",
+    "build:script": "pnpm run clean && node scripts/copy-manifest.mjs --script-only && pnpm run build:server",
+    "clean": "node scripts/clean.mjs",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "oxlint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "clasp:login": "clasp login",
+    "clasp:create": "pnpm run clasp:create:standalone",
+    "clasp:create:standalone": "pnpm run build && clasp create --type standalone --rootDir dist",
+    "clasp:create:sheets": "pnpm run build && clasp create --type sheets --rootDir dist",
+    "clasp:create:docs": "pnpm run build && clasp create --type docs --rootDir dist",
+    "clasp:create:slides": "pnpm run build && clasp create --type slides --rootDir dist",
+    "clasp:create:forms": "pnpm run build && clasp create --type forms --rootDir dist",
+    "push": "pnpm run build && clasp push",
+    "push:script": "pnpm run build:script && clasp push",
+    "deploy": "pnpm run build && clasp deploy",
+    "deploy:web": "pnpm run build && clasp push --force && clasp deploy -d webapp",
+    "redeploy:web": "pnpm run build && node scripts/redeploy-web.mjs",
+    "logs": "clasp logs --watch",
+    "open": "clasp open",
+    "open:container": "clasp open-container"
+  },
+  "devDependencies": {
+    "@google/clasp": "^3.0.6-alpha",
+    "@types/google-apps-script": "^2.0.1",
+    "@types/node": "^24.0.0",
+    "oxlint": "^1.62.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "vite": "^8.0.3",
+    "vitest": "^3.2.4"
+  }
+}
